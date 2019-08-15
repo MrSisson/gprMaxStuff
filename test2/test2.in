@@ -10,13 +10,9 @@
 
 //tx/rx are 5 meters above the ground
 #waveform: ricker 6 100e6 my_ricker
-#voltage_source: z 2.0 63.0 0 50 my_ricker
-//#hertzian_dipole: z 2.0 63.0 0 my_ricker
 #rx: 6.0 63.0 0
 
-//These step require 24 Bscan simulations
-//#src_steps: 3.0 0 0
-#tx_steps: 3.0 0 0
+//These step require 30 Bscan simulations
 #rx_steps: 3.0 0 0
 
 #box: 0 60.0 0.0 100.0 63.0 .1 debris
@@ -25,3 +21,8 @@
 #cylinder: 50 45 0 50 45 .1 2.5 free_space
 
 #geometry_view: 0.0 0.0 0.0 100.0 100.0 0.1 0.1 0.1 .1 test2 n
+
+#python:
+from gprMax.input_cmd_funcs import *
+voltSource = voltage_source('z', 2.0 + (current_model_run * 3.0), 63.0, 0, 50, 'my_ricker')
+#end_python:
