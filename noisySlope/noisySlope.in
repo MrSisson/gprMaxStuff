@@ -1,5 +1,5 @@
 #title: Noisy_Slope
-#domain: 100.0 100.0 .1
+#domain: 100.0 100.0 2.5
 #dx_dy_dz: 0.1 0.1 .1
 #time_window: 0.8e-6
 #num_threads: 12
@@ -13,25 +13,26 @@
 //#fractal_box: 0 70 0 100 71 0.1 1.5 1 .5 1 50 my_soil my_soil_box
 //#add_surface_roughness: 0 71 0 100 71 .1 1.5 1 1 70.5 71.8 my_soil_box
 
-#waveform: ricker 400 100e6 my_ricker
+#waveform: ricker 400 50e6 my_ricker
 #rx: 6.0 70.0 0
 
-//These step support max of 60 simulations (Bscan)
-#rx_steps: 1.5 0 0
+//These step support max of 30 simulations (Bscan)
+#rx_steps: 3 0 0
 
-#triangle: 0 70.0 0.0 100.0 70.0 0 100.0 60.0 0 .1 debris
-#triangle: 0 70.0 0.0 100.0 60.0 0 0 60.0 0 .1 ice
-#box: 0 40.0 0.0 100.0 60.0 .1 ice
-#triangle: 0 40.0 0 100.0 40.0 0 100.0 30.0 0 .1 ice
-#triangle: 0 30.0 0 0 40.0 0 100.0 30.0 0 .1 bed_rock
-#box: 0 0 0 100.0 30.0 0.1 bed_rock
-#cylinder: 50 45 0 50 45 .1 2.5 free_space
+#triangle: 0 70.0 0.0 100.0 70.0 0 100.0 60.0 0 2.5 debris
+#triangle: 0 70.0 0.0 100.0 60.0 0 0 60.0 0 2.5 ice
+#box: 0 40.0 0.0 100.0 60.0 2.5 ice
+#triangle: 0 40.0 0 100.0 40.0 0 100.0 30.0 0 2.5 ice
+#triangle: 0 30.0 0 0 40.0 0 100.0 30.0 0 2.5 bed_rock
+#box: 0 0 0 100.0 30.0 2.5 bed_rock
+#cylinder: 50 45 0 50 45 2.5 2.5 free_space
+#cylinder: 47.5 45 0 47.5 45 2.5 2.5 free_space
 
-#geometry_view: 0.0 0.0 0.0 100.0 100.0 0.1 0.1 0.1 .1 noisySlope n
+#geometry_view: 0.0 0.0 0.0 100.0 100.0 2.5 0.1 0.1 2.5 noisySlope n
 
 #python:
 from gprMax.input_cmd_funcs import *
-transmission_line = transmission_line('z', 2.0 + (current_model_run * 1.5), 70.0, 0, 50, 'my_ricker') 
-edge1 = edge(
+transmission_line = transmission_line('z', 2.0 + (current_model_run * 3), 70.0, 1.25, 50, 'my_ricker') 
+edge1 = edge(2.0 + (current_model_run * 3), 70.0, .25, 2.0 + (current_model_run * 3), 70, 2.25, 'pec')
 #end_python:
 
